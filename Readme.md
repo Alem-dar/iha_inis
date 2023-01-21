@@ -1,5 +1,7 @@
 # iha_inis
-# Proje hakkında video linki --> https://drive.google.com/drive/folders/1ASdnBdnY_AWT82pAWxVbZfxohb6oN-rd?usp=sharing
+
+
+Proje hakkında video linki --> https://drive.google.com/drive/folders/1ASdnBdnY_AWT82pAWxVbZfxohb6oN-rd?usp=sharing
 
 Bu projede ilk olarak kullanılan sistemler, programlar ve robotlar önem addediyor. Bunlar Linux işletim sistemi, Rviz veya Gazebo gibi programlar 
 kurulumu, çalışması projenin başlangıç kısmını oluşturacaktır.
