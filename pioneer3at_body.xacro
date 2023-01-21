@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  >
+
+  <!-- Chassis -->
+  <link name="base_link">
+    <inertial>
+      <mass value="14.0"/>
+      <origin xyz="0 0 0.177"/>
+      <inertia ixx="0.14711667" ixy="0.0" ixz="0.0"
+        iyy="0.334951167" iyz="0.0"
+        izz="0.3978345"/>
+    </inertial>
+    <visual name="base_visual">
+      <origin xyz="0 0 0.18" rpy="0 0 0"/>
+      <geometry name="pioneer_geom">
+        <mesh filename="package://p3at_description/meshes/p3at_meshes/chassis.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.18" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.0 0.0 0.0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  
+  <link name="cubuk1">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.25"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.04 0.11 0.4"/>
+    </visual>
+
+  </link>
+  <joint name="cubuk1_to_chassis" type="fixed">
+    <parent link="base_link"/>
+    <child link="cubuk1"/>
+  </joint>
+
+
+
+<link name="cubuk2">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.25"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.04 -0.102 0.4"/>
+    </visual>
+
+  </link>
+  <joint name="cubuk2_to_chassis" type="fixed">
+    <parent link="base_link"/>
+    <child link="cubuk2"/>
+  </joint>
+
+
+  <link name="cubuk3">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.25"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.01 0 0.4"/>
+    </visual>
+
+  </link>
+  <joint name="cubuk3_to_chassis" type="fixed">
+    <parent link="base_link"/>
+    <child link="cubuk3"/>
+  </joint>
+
+
+    <link name="cubuk4">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.25"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="-0.1 0 0.4"/>
+    </visual>
+
+  </link>
+  <joint name="cubuk4_to_chassis" type="fixed">
+    <parent link="base_link"/>
+    <child link="cubuk4"/>
+  </joint> 
+
+  <link name="platform">
+    <visual>
+      <geometry>
+        <box size="0.6 0.6 0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.52"/>
+    </visual>
+    
+    
+   <!-- <collision>
+      <geometry>
+        <box size="0.6 0.6 0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    
+    </collision> -->
+
+    <!--<inertial>
+      <mass value="2.0"/>
+      <inertia ixx="0.06015" ixy="0.0" ixz="0.0"
+        iyy="0.12" iyz="0.0"
+        izz="0.06015"/>
+    </inertial> -->
+
+
+
+  </link>
+  <joint name="platform_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="platform"/>
+  </joint>
+
+  
+
+
+  <link name="p3at_front_left_wheel">
+    <inertial>
+      <mass value="1.5"/>	
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.005240625" ixy="0" ixz="0"
+        iyy="0.005240625" iyz="0" izz="0.009075"/>
+    </inertial>
+    <visual name="visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="geom">
+        <mesh filename="package://p3at_description/meshes/p3at_meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.110" length="0.075"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="p3at_front_left_wheel_joint" type="continuous">
+    <axis xyz="0 0 -1"/>
+    <limit effort="100" velocity="100" />
+    <joint_properties damping="0.7"/>
+    <origin xyz="0.125 0.2010 0.11" rpy="1.5707 0 0"/>
+    <parent link="base_link"/>
+    <child link="p3at_front_left_wheel"/>
+  </joint>
+
+  <link name="p3at_front_right_wheel">
+    <inertial>
+      <mass value="1.5"/>	
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.005240625" ixy="0" ixz="0"
+        iyy="0.005240625" iyz="0" izz="0.009075"/>
+    </inertial>
+    <visual name="visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="geom">
+        <mesh filename="package://p3at_description/meshes/p3at_meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.110" length="0.075"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="p3at_front_right_wheel_joint" type="continuous">
+    <axis xyz="0 0 -1"/>
+    <limit effort="100" velocity="100" />
+    <joint_properties damping="0.7"/>
+    <origin xyz="0.125 -0.2010 0.11" rpy="1.5707 0 0"/>
+    <parent link="base_link"/>
+    <child link="p3at_front_right_wheel"/>
+  </joint>
+
+
+
+  <link name="p3at_rear_left_wheel">
+    <inertial>
+      <mass value="1.5"/>	
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.005240625" ixy="0" ixz="0"
+        iyy="0.005240625" iyz="0" izz="0.009075"/>
+    </inertial>
+    <visual name="visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="geom">
+        <mesh filename="package://p3at_description/meshes/p3at_meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.110" length="0.075"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="p3at_rear_left_wheel_joint" type="continuous">
+    <axis xyz="0 0 -1"/>
+    <limit effort="100" velocity="100" />
+    <joint_properties damping="0.7"/>
+    <origin xyz="-0.125 0.2010 0.11" rpy="1.5707 0 0"/>
+    <parent link="base_link"/>
+    <child link="p3at_rear_left_wheel"/>
+  </joint>
+
+  <link name="p3at_rear_right_wheel">
+    <inertial>
+      <mass value="1.5"/>	
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.005240625" ixy="0" ixz="0"
+        iyy="0.005240625" iyz="0" izz="0.009075"/>
+    </inertial>
+    <visual name="visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="geom">
+        <mesh filename="package://p3at_description/meshes/p3at_meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.110" length="0.075"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="p3at_rear_right_wheel_joint" type="continuous">
+    <axis xyz="0 0 -1"/>
+    <limit effort="100" velocity="100" />
+    <joint_properties damping="0.7"/>
+    <origin xyz="-0.125 -0.2010 0.11" rpy="1.5707 0 0"/>
+    <parent link="base_link"/>
+    <child link="p3at_rear_right_wheel"/>
+  </joint>
+
+
+  <link name="simple_box_base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0" />
+      <inertia ixx="0.0741666666667" ixy="0.0" ixz="0.0" iyy="0.0585416666667" iyz="0.0" izz="0.0260416666667"/>
+    </inertial>
+    <!-- SIMPLE BOX COLLISION ETKISIZ HALE GETIRILDI. -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="1 1 0.03"/>
+      </geometry>
+    </collision> 
+    
+    <visual>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <!--<box size="0.8 0.8 0.2"/>-->
+        <mesh filename="package://hector_quadrotor_description/meshes/quadrotor/ar_2020.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="p3at_to_artag_joint" type="fixed">
+    <axis xyz="0 0 -1"/>
+    <limit effort="100" velocity="100" />
+    <joint_properties damping="0.7"/>
+    <origin xyz="0 0 0.55" rpy="0 0 0"/><!--0.52 yapildi.-->
+    <parent link="base_link"/>
+    <child link="simple_box_base_link"/>
+  </joint>
+
+
+
+
+  <link name="gps_link">
+    <collision>
+    <origin xyz="0 0 0.8" rpy="0 0 0"/>
+    <geometry>
+    <box size="0.0 0.0 0.0"/>
+    </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.02 0.02"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
+  <gazebo reference="gps_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <joint name="gps_joint" type="fixed">
+    <origin xyz="0 0 0.20" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="gps_link"/>
+  </joint>
+
+
+
+
+
+
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>$(arg robot_name)</robotNamespace>
+      <leftFrontJoint>p3at_front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>p3at_front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>p3at_rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>p3at_rear_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.215</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <torque>200</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <broadcastTF>true</broadcastTF>
+    </plugin>
+  </gazebo>
+
+
+
+  <gazebo>
+    <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
+      <updateRate>4.0</updateRate>
+      <bodyName>gps_link</bodyName>
+      <frameId>gps_link</frameId>
+      <topicName>/gps/fix</topicName>
+      <velocityTopicName>/gps/fix_velocity</velocityTopicName>
+      <referenceLatitude>49.860246</referenceLatitude>            <!--  -30.06022459407145675  -->
+      <referenceLongitude>8.687077</referenceLongitude>         <!--  -51.173913575780311191  -->
+      <!--<referenceHeading>90</referenceHeading>
+      <referenceAltitude>10</referenceAltitude>-->
+      <offset>0 0 0</offset>
+      <drift>0.001 0.001 0.001</drift>
+      <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
+      <velocityDrift>0.001 0.001 0.001</velocityDrift>
+      <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
+    </plugin>
+  </gazebo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</robot>
